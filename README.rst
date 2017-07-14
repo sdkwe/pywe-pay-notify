@@ -25,5 +25,5 @@ Method
 
 ::
 
-    def check_pay_notify(xml, api_key):
+    def check_pay_notify(xml, api_key=None, wx_configs=None, api_key_func=None):
 

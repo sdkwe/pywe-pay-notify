@@ -9,14 +9,14 @@ from pywe_xml import xml_to_dict
 __all__ = ['check_pay_notify']
 
 
-def check_pay_notify(xml, api_key):
+def check_pay_notify(xml, api_key=None, wx_configs=None, api_key_func=None):
     # XML -> Dict
     data = xml_to_dict(xml)
     if isinstance(data, basestring):
         return data, False
 
     # Check Sign
-    if not check_signature(data, api_key):
+    if not check_signature(data, api_key or (api_key_func and api_key_func(data)) or wx_configs.get(data.get('trade_type', ''), {}).get('apiKey')):
         return data, False
 
     # Return Code

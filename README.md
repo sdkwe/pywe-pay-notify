@@ -17,5 +17,5 @@ from pywe_pay_notify import check_pay_notify
 # Method
 
 ```python
-def check_pay_notify(xml, api_key):
+def check_pay_notify(xml, api_key=None, wx_configs=None, api_key_func=None):
 ```
