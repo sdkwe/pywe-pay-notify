@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
+from pywe_sign import check_signature
+from pywe_xml import xml_to_dict
+
+
+__all__ = ['check_pay_notify']
+
+
+def check_pay_notify(xml, api_key):
+    # XML -> Dict
+    data = xml_to_dict(xml)
+    if isinstance(data, basestring):
+        return data, False
+
+    # Check Sign
+    if not check_signature(data, api_key):
+        return data, False
+
+    # Return Code
+    return_code = data.get('return_code', '')
+    if return_code != 'SUCCESS':
+        return data, False
+
+    return data, True
