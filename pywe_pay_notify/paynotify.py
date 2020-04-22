@@ -5,6 +5,8 @@ from __future__ import unicode_literals
 from pywe_sign import check_signature
 from pywe_xml import xml_to_dict
 
+from .compat import basestring
+
 
 __all__ = ['check_pay_notify']
 
